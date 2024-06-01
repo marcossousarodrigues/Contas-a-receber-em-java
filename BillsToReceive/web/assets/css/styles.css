@@ -1,0 +1,403 @@
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+html{
+    background-color: #f1f1f1;
+    color: #333333;
+}
+
+p, h1, h2, h3{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h1{
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+img{
+    max-width: 50px;
+    margin-top: 20px;
+}
+
+.container-legend{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 400px;
+}
+
+.container-legend h3{
+    font-size: 1.5em;
+}
+
+.legend-description{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.legend-position p{
+    margin-right: 10px;
+}
+
+
+
+.legend{
+    width: 20px;
+    height: 20px;
+    background-color: #000;
+    border-radius: 50%;
+}
+
+/* cores das legendas */
+.legend-red-blocked{
+    background-color: #b8212e;
+}
+.legend-green-blocked{
+    background-color: #38a143;
+}
+
+.legend-green{
+    background-color: #24d695;
+}
+
+.legend-blue{
+    background-color: #647afa;
+}
+
+.legend-orange{
+    background-color: #fcab6d;
+}
+
+.bg-color-legend-green{
+    background-color: #56bf66;
+}
+
+
+
+ol li, ul li{
+    padding: 10px;
+}
+
+
+.btns-create-head button{
+    background-color: #00008B;
+    color: #fff;
+    padding: 10px;
+    margin: 8px;
+    min-width: 220px;
+    border:none;
+    border-radius: 5px;
+}
+
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.container h1{
+    font-size: 3em;
+}
+.container h2{
+    font-size: 2em;
+}
+
+header{
+   display: flex;
+   flex-direction: row;
+   justify-content: space-around;
+   background-color: #00008B;
+   color: #fff;
+}
+
+header .logo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin: 20px;
+}
+
+header .logo span{
+    text-align: center;
+}
+
+
+.nav-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    width: 100%;
+    background-color: #00008B;
+    margin-bottom: 40px;
+}
+
+.nav-menu ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.nav-menu ul li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+    color: #fff;
+    margin: 5px;
+    position: relative;
+    cursor: pointer;
+    min-width: 150px;
+    text-align: center;
+}
+
+.nav-menu ul li a{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.nav-menu ul li img{
+    width: 20px;
+}
+
+
+
+/* submenu */
+.nav-menu ul li ul{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    top: 40px;
+    z-index: 1;
+    background-color: #020740;
+    display: none;
+    min-width: 150px;
+}
+.nav-menu ul li:hover > ul{
+    display: flex;
+}
+.nav-menu ul li ul li{
+    width: 100%;
+    padding: 3px;
+}
+.nav-menu ul li ul li:hover{
+    background-color: #092be8;
+}
+.nav-menu ul li ul li a{
+    text-decoration: none;
+}
+
+
+.presentation{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+
+/* pagina toAdd*/
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.forms form{
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 80%;
+    flex-wrap: wrap;
+    padding: 30px
+}
+
+.forms #form-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+}
+
+
+.forms form .label-input, .forms form .label-select, .forms form .label-textarea{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 30%;
+    margin-top: 10px;
+}
+
+.forms #form-user .label-input, .forms #form-user .label-select, .forms #form-user .label-textarea, .forms #form-user .btn{
+    width: 100%;
+}
+
+.forms form .label-textarea{
+    width: 100%;
+}
+.forms form input, .forms form select, .forms form textarea{
+    height: 40px;
+    border-radius: 8px;
+    outline: none;
+    padding: 5px;
+    background: #fff;
+    color: #333;
+    border: none;
+    width: 100%;
+}
+.forms form textarea{
+    min-height: 80px;
+}
+.forms form .btn{
+    width: 80%;
+    margin-top: 30px;
+}
+.forms form .btn button{
+    width: 120px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #006400;
+    color: #fff;
+}
+
+/* pesquisa da tabela*/
+
+.form-search{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-top: 10px;
+}
+.form-search form{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+.form-search form .label-input{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    width: 30%;
+    margin-right: 10px;
+}
+
+.form-search form .label-input label{
+    margin-right: 30px;
+    color: #111;
+}
+.form-search form .label-input input, .form-search form .label-input select{
+    background: #fff;
+    height: 40px;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    color: #333;
+    padding: 5px;
+}
+.form-search form .btn{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 60px;
+}
+
+.label-input .dt_emission, .label-input .dt_payment{
+    background-color: #CCC;
+}
+.form-search form button{
+    padding: 5px;
+    height: 40px;
+    background-color: #006400;
+    color: #fff;
+    border: none;
+    width: 100px;
+    border-radius: 5px;
+}
+
+
+/* formatação da tabela */
+
+
+.tables{
+   width: 80%;
+   overflow-y: scroll;
+   scrollbar-width: thin;
+   scrollbar-color: #82baa6 #f1f1f1;
+   margin-bottom: 100px;
+   min-height: 200px;
+   max-height: 400px;
+}
+
+
+.tables table{
+    width: 100%;
+    border: none;
+    background-color: #F5F5F5;
+}
+
+.tables table img{
+    width: 25px;
+}
+.tables table th{
+    min-width: 150px;
+    background-color: transparent;
+    padding: 5px;
+    border: none;
+}
+
+.tables table td{
+    padding: 10px;
+    text-align: left;
+    border: none;
+    margin-right: 5px;
+}
+
+.tables table .table-color-one{
+    background-color: #FFFFFF;
+}
+
+.tables table .table-color-two{
+    background-color: #F5F5F5;
+}
+
+.message_user{
+    text-align: center;
+}
+.message-error{
+    color: red;
+}
+
