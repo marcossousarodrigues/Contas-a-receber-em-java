@@ -136,7 +136,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a>
+                        <a href="/BillsToReceive/ReceivableController?action=Find&field=pay&fieldValue=1">
                             <div class="legend legend-green"></div>
                             <span>Recebimentos Confirmados</span>
                         </a>

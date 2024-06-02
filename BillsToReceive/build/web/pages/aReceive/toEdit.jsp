@@ -50,7 +50,22 @@
         
         <div class="label-select">
             <label>Produto/Serviço</label>
-            <select name="product_id">
+            <select name="product_id" class="product_id">
+                <% for(int i = 0; i < productEdit.size(); i++) {
+                    String selected = "";
+                    if (productEdit.get(i).getId() == receivableEdit.getProduct().getId()) {
+                        selected = "selected"; 
+                    }
+                %>
+                <option value="<%= productEdit.get(i).getId() %>" <%= selected %>><%= productEdit.get(i).getId() %></option>
+                <% } %>
+                <option></option>
+            </select>
+        </div>
+        
+        <div class="label-select">
+            <label>Produto/Serviço</label>
+            <select name="name_product" class="name_product">
                 <% for(int i = 0; i < productEdit.size(); i++) {
                     String selected = "";
                     if (productEdit.get(i).getId() == receivableEdit.getProduct().getId()) {
@@ -62,6 +77,22 @@
                 <option></option>
             </select>
         </div>
+                
+        <div class="label-select">
+            <label>Produto/Serviço</label>
+            <select name="description_product" class="description_product">
+                <% for(int i = 0; i < productEdit.size(); i++) {
+                    String selected = "";
+                    if (productEdit.get(i).getId() == receivableEdit.getProduct().getId()) {
+                        selected = "selected"; 
+                    }
+                %>
+                <option value="<%= productEdit.get(i).getId() %>" <%= selected %>><%= productEdit.get(i).getDescription() %></option>
+                <% } %>
+                <option></option>
+            </select>
+        </div>
+                
         
         <div class="label-input">
             <label>Valor</label>
@@ -70,7 +101,22 @@
           
         <div class="label-select">
             <label>Cliente</label>
-            <select name="client_id">
+            <select name="client_id" class="client_id">
+                <% for(int i = 0; i < clientEdit.size(); i++) {
+                    String selected = "";
+                    if (clientEdit.get(i).getId() == receivableEdit.getClient().getId()) {
+                        selected = "selected"; 
+                    }
+                %>
+                <option value="<%= clientEdit.get(i).getId() %>" <%= selected %>><%= clientEdit.get(i).getId() %></option>
+                <% } %>
+                <option></option>
+            </select>
+        </div>
+                
+        <div class="label-select">
+            <label>Cliente</label>
+            <select name="client_name" class="client_name">
                 <% for(int i = 0; i < clientEdit.size(); i++) {
                     String selected = "";
                     if (clientEdit.get(i).getId() == receivableEdit.getClient().getId()) {
@@ -85,7 +131,22 @@
 
         <div class="label-select">
             <label>Natureza Financeira</label>
-            <select name="nature_id">
+            <select name="nature_id" class="nature_id">
+                <% for(int i = 0; i < natureEdit.size(); i++) {
+                    String selected = "";
+                    if (natureEdit.get(i).getId() == receivableEdit.getNature().getId()) {
+                        selected = "selected"; 
+                    }
+                %>
+                <option value="<%= natureEdit.get(i).getId() %>" <%= selected %>><%= natureEdit.get(i).getId() %></option>
+                <% } %>
+                <option></option>
+            </select>
+        </div>
+                
+        <div class="label-select">
+            <label>Natureza Financeira</label>
+            <select name="nature_name" class="nature_name">
                 <% for(int i = 0; i < natureEdit.size(); i++) {
                     String selected = "";
                     if (natureEdit.get(i).getId() == receivableEdit.getNature().getId()) {
@@ -101,7 +162,7 @@
 
         <div class="label-input">
             <label>Data Pagamento</label>
-            <input type="date" name="dt_payment" value="<%= receivableEdit.getDt_payment()%>" class="dt_payment"/>
+            <input type="date" name="dt_payment" value="<%= receivableEdit.getDt_payment()%>" class="dt_payment" readonly="true"/>
         </div>
         
         <div class="label-input">
@@ -121,7 +182,7 @@
         
         <div class="label-select">
             <label>Pago</label>
-            <select name="pay">
+            <select name="pay" class="pay">
                 <option value="<%= receivableEdit.getPay()%>"><%= receivableEdit.getPay().equals("1") ? "sim" : "Não"%></option>
                 <option value="2">Não</option>
                 <option value="1">Sim</option>
@@ -130,11 +191,11 @@
                 
         <div class="label-input">
             <label>Data de Emissão</label>
-            <input type="date" name="dt_emission" value="<%= receivableEdit.getDt_emission()%>" class="dt_emission"/>
+            <input type="date" name="dt_emission" value="<%= receivableEdit.getDt_emission()%>" class="dt_emission" readonly="true"/>
         </div>
         
         <div class="label-select">
-            <label>Pago</label>
+            <label>Bloqueado</label>
             <select name="blocked">
                 <option value="<%= receivableEdit.getBlocked()%>"><%= receivableEdit.getBlocked().equals("1") ? "sim" : "Não"%></option>
                 <option value="2">Não</option>
@@ -149,5 +210,6 @@
 </section>
 
 </section>
+    <script src="/BillsToReceive/assets/js/manipulation-form-elements.js"></script>
 </body>
 </html>

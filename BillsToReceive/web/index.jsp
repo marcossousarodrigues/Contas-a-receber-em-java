@@ -12,7 +12,7 @@
     */
 %>
 
-
+    
 <%@include file="/header/header.jsp" %>
 
 <section class="container">

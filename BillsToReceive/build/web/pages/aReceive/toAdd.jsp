@@ -45,9 +45,23 @@
             <input type="text" name="title_type" class="title_type"/>
         </div>
         
-          <div class="label-select">
-            <label>Produto/Serviço</label>
-            <select name="product_id">
+        <div class="label-select">
+            <label>Codigo do Produto/Serviço</label>
+            <select name="product_id" class="product_id">
+                <option></option>
+                <% if(productAdd != null){ %>
+                <% for(int i = 0; i < productAdd.size(); i++) { %>
+                
+                <option value="<%= productAdd.get(i).getId() %>"><%= productAdd.get(i).getId() %></option>
+                
+                <% } %>
+                <% } %>
+            </select>
+        </div>
+        
+        <div class="label-select">
+            <label>Nome do Produto/Serviço</label>
+            <select name="name_product" class="name_product">
                 <option></option>
                 <% if(productAdd != null){ %>
                 <% for(int i = 0; i < productAdd.size(); i++) { %>
@@ -58,21 +72,58 @@
                 <% } %>
             </select>
         </div>
+            
+        <div class="label-select">
+            <label>Descrição do Produto/Serviço</label>
+            <select name="description_product" class="description_product">
+                <option></option>
+                <% if(productAdd != null){ %>
+                <% for(int i = 0; i < productAdd.size(); i++) { %>
+                
+                <option value="<%= productAdd.get(i).getId() %>"><%= productAdd.get(i).getDescription() %></option>
+                
+                <% } %>
+                <% } %>
+            </select>
+        </div>
         
-        
-        <div class="label-input">
-            <label>Descrição do Produto</label>
-            <input type="text" name="description" class="description"/>
+        <div class="label-select" style="display: none;">
+            
+           <select name="product_value" class="product_value" >
+                <option></option>
+                <% if(productAdd != null){ %>
+                <% for(int i = 0; i < productAdd.size(); i++) { %>
+                
+                <option value="<%= productAdd.get(i).getId() %>"><%= productAdd.get(i).getPrice() %></option>
+                
+                <% } %>
+                <% } %>
+            </select>
+            
         </div>
 
         <div class="label-input">
             <label>Valor</label>
-            <input type="text" name="title_value" class="value"/>
+            <input type="text" name="title_value" class="title_value"/>
         </div>
 
         <div class="label-select">
-            <label>Cliente</label>
-            <select name="client_id">
+            <label>Codigo do Cliente</label>
+            <select name="client_id" class="client_id">
+                <option value=""></option>
+                <% if(clientAdd != null){ %>
+                <% for(int i = 0; i < clientAdd.size(); i++) { %>
+
+                <option value="<%= clientAdd.get(i).getId() %>"><%= clientAdd.get(i).getId() %></option>
+
+                <% } %>
+                <% } %>
+            </select>
+        </div>
+        
+        <div class="label-select">
+            <label>Nome do Cliente</label>
+            <select name="client_name" class="client_name">
                 <option value=""></option>
                 <% if(clientAdd != null){ %>
                 <% for(int i = 0; i < clientAdd.size(); i++) { %>
@@ -85,8 +136,22 @@
         </div>
 
         <div class="label-select">
-            <label>Categoria/Natureza Financeira</label>
-            <select name="nature_id">
+            <label>Codigo da Natureza Financeira</label>
+            <select name="nature_id" class="nature_id">
+                <option value=""></option>
+                <% if(clientAdd != null){ %>
+                <% for(int i = 0; i < natureAdd.size(); i++) { %>
+
+                <option value="<%= natureAdd.get(i).getId() %>"><%= natureAdd.get(i).getId() %></option>
+
+                <% } %>
+                <% } %>
+            </select>
+        </div>
+            
+        <div class="label-select">
+            <label>Nome da Natureza Financeira</label>
+            <select name="nature_name" class="nature_name">
                 <option value=""></option>
                 <% if(clientAdd != null){ %>
                 <% for(int i = 0; i < natureAdd.size(); i++) { %>
@@ -100,7 +165,7 @@
 
         <div class="label-input">
             <label>Data do Pagamento</label>
-            <input type="date" name="dt_payment" class="dt_payment" disabled/>
+            <input type="date" name="dt_payment" class="dt_payment" readonly="true"/>
         </div>
             
         <div class="label-input">
@@ -119,7 +184,7 @@
 
         <div class="label-select">
             <label>Pago</label>
-            <select name="pay">
+            <select name="pay" class="pay">
                 <option value="2">Não</option>
                 <option value="1">Sim</option>
             </select>
@@ -127,7 +192,7 @@
             
         <div class="label-input">
             <label>Data Emissão</label>
-            <input type="date" name="dt_emission" class="dt_emission" disabled/>
+            <input type="date" name="dt_emission" class="dt_emission" readonly="true"/>
         </div>
             
         <div class="label-select">
