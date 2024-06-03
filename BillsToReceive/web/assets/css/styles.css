@@ -31,12 +31,15 @@ img{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
-    width: 400px;
+    min-width: 400px;
 }
 
 .container-legend h3{
     font-size: 1.5em;
+    width: 100%;
+    text-align: center;
 }
 
 .legend-description{
@@ -44,6 +47,7 @@ img{
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    margin: 10px;
 }
 
 .legend-position p{

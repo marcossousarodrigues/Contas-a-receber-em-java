@@ -4,12 +4,11 @@
  */
 package br.com.commandfactory.controller.client;
 
+import br.com.commandfactory.controller.receivable.ICommand;
 import dao.ClientDao;
-import dao.NatureDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.Client;
-import models.Nature;
 
 /**
  *

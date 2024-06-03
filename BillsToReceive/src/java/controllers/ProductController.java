@@ -4,7 +4,7 @@
  */
 package controllers;
 
-import br.com.commandfactory.controller.product.ICommand;
+import facade.controller.ControllerFacade;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -32,30 +32,16 @@ public class ProductController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-         try (PrintWriter out = response.getWriter()) {
-            try {
-             
-                
-                String paramAction = request.getParameter("action");
-                             
-                String className = "br.com.commandfactory.controller.product." + paramAction + "ProductAction";
-                
-                Class classAction = Class.forName(className);
+        try (PrintWriter out = response.getWriter()) {
 
-                ICommand commandAction = (ICommand) classAction.newInstance();
+            String paramAction = request.getParameter("action");
 
-                String pageDispatcher = commandAction.execute(request, response);
-                
-                request.getRequestDispatcher("/" + pageDispatcher).forward(request, response);
-                
-                
-            } catch (Exception ex) {
-                System.out.println("Erro: " + ex.getMessage());
-                request.setAttribute("erro", ex.getMessage());
-                response.getWriter().println("Error "+ ex.getMessage());
-               // request.getRequestDispatcher("erro.jsp").forward(request, response);
-            }
-        
+            String className = "br.com.commandfactory.controller.product." + paramAction + "ProductAction";
+
+            ControllerFacade controllerFacade = new ControllerFacade();
+
+            controllerFacade.processController(request, response, className);
+
         }
     }
 

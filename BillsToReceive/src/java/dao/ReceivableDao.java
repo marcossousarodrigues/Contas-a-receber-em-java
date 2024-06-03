@@ -212,7 +212,7 @@ public class ReceivableDao {
                         .titleType(rs.getString("title_type"))
                         .title_value(rs.getDouble("title_value"))
                         .dt_payment(rs.getDate("dt_payment"))
-                        .dt_payment(rs.getDate("dt_payment"))
+                        .dt_expiration(rs.getDate("dt_expiration"))
                         .form_of_payment(rs.getString("form_of_payment"))
                         .pay(rs.getString("pay"))
                         .dt_emission(rs.getDate("dt_emission"))
@@ -338,7 +338,63 @@ public class ReceivableDao {
                         .titleType(rs.getString("title_type"))
                         .title_value(rs.getDouble("title_value"))
                         .dt_payment(rs.getDate("dt_payment"))
+                        .dt_expiration(rs.getDate("dt_expiration"))
+                        .form_of_payment(rs.getString("form_of_payment"))
+                        .pay(rs.getString("pay"))
+                        .dt_emission(rs.getDate("dt_emission"))
+                        .blocked(rs.getString("blocked"))
+                        .product(product)
+                        .nature(nature)
+                        .client(client)
+                        .build();
+
+                list.add(receivable);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
+     
+     
+     public ArrayList<Receivable> selectByDtExpiration() throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        FactoryConnection connection = new FactoryConnection();
+         FactoryFormatTypes formatTypes = new FactoryFormatTypes();
+        PreparedStatement stmt;
+        ResultSet rs;
+        
+        
+        String sql = "SELECT * FROM tb_receivable WHERE dt_expiration <= ? AND pay <> 1";
+
+        conn = connection.getConnection();
+        stmt = conn.prepareStatement(sql);
+        
+        stmt.setString(1, formatTypes.convertDateToString(new Date()));
+        
+        rs = stmt.executeQuery();
+
+        ArrayList<Receivable> list = new ArrayList<Receivable>();
+
+        try {
+
+            while (rs.next()) {
+                
+                // carregando relacionamentos 
+                Product product = ProductDao.selectProduct(rs.getInt("product_id"));
+                Nature nature = NatureDao.selectNature(rs.getInt("nature_id"));
+                Client client = ClientDao.selectClient(rs.getInt("client_id"));
+                
+                Receivable receivable = new Receivable.ReceivableBuilder()
+                        .id(rs.getInt("id"))
+                        .title(rs.getString("title"))
+                        .installments(rs.getString("installments"))
+                        .titleType(rs.getString("title_type"))
+                        .title_value(rs.getDouble("title_value"))
                         .dt_payment(rs.getDate("dt_payment"))
+                        .dt_expiration(rs.getDate("dt_expiration"))
                         .form_of_payment(rs.getString("form_of_payment"))
                         .pay(rs.getString("pay"))
                         .dt_emission(rs.getDate("dt_emission"))

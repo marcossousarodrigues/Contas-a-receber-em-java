@@ -2,40 +2,45 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package br.com.commandfactory.controller.product;
-
+package br.com.commandfactory.controller.user;
 
 import br.com.commandfactory.controller.receivable.ICommand;
-import dao.NatureDao;
 import dao.ProductDao;
+import dao.UserDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import models.Nature;
 import models.Product;
-
+import models.User;
 /**
  *
  * @author Marcos
  */
-public class ReadAllProductAction implements ICommand {
+public class FindUserAction implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
     {
         try{
+            String searchMessage = "";
             
-            ProductDao productDao = new ProductDao();
+            UserDao userDao = new UserDao();
             
-            ArrayList<Product> list = productDao.selectAll();
             
-            request.setAttribute("products", list); 
-           
+            ArrayList<User> list = userDao.selectByField(request.getParameter("field"), 
+                    request.getParameter("fieldValue"));
+            
+            searchMessage += list.size()+" Resultado(s) Correspondentes Para: ";
+            searchMessage += " '"+request.getParameter("fieldValue")+"'";
+            
+            request.setAttribute("users", list); 
+            request.setAttribute("searchMessage", searchMessage); 
+            
         }
         catch(Exception e)
         {
             System.out.println("Error "+ e.getMessage());
         }
         
-        return "pages/product/listProduct.jsp";
+        return "pages/user/listUsers.jsp";
     }
 }

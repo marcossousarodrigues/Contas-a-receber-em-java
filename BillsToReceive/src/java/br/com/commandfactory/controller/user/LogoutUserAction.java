@@ -4,11 +4,10 @@
  */
 package br.com.commandfactory.controller.user;
 
-import dao.UserDao;
+import br.com.commandfactory.controller.receivable.ICommand;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import models.User;
 
 /**
  *

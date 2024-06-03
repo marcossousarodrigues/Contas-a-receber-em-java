@@ -9,7 +9,9 @@ import utils.FactoryConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import models.Product;
 
 /**
  *
@@ -224,6 +226,49 @@ public class UserDao {
             System.out.println(e.getMessage());
         }
        
+    }
+    
+     public ArrayList<User> selectByField(String field, String fieldValue) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        FactoryConnection connection = new FactoryConnection();
+
+        PreparedStatement stmt;
+        ResultSet rs;
+        
+        
+        String sql = "SELECT * FROM tb_users WHERE "+field+" LIKE ? ";
+
+        conn = connection.getConnection();
+        stmt = conn.prepareStatement(sql);
+        
+        stmt.setString(1, "%" + fieldValue + "%");
+        
+        rs = stmt.executeQuery();
+
+        ArrayList<User> list = new ArrayList<User>();
+
+        try {
+
+            while(rs.next()) {
+
+                User user = new User.UserBuilder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .surname(rs.getString("surname"))
+                        .email(rs.getString("email"))
+                        .password(rs.getString("password"))
+                        .permission(rs.getString("permission"))
+                        .blocked(rs.getString("blocked"))
+                        .build();
+                
+                list.add(user);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return list;
     }
     
 }

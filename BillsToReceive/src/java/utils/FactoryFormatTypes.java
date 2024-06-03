@@ -53,6 +53,15 @@ public class FactoryFormatTypes {
         return newDate;
     }
     
+    public static String convertDateToString(Date date) {
+        // Define o formato da data que você deseja
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        
+        // Converte a data para a string no formato especificado
+        return dateFormat.format(date);
+    }
+    
+    
     public double formatDouble(String number)
     {
         return Double.parseDouble(number);

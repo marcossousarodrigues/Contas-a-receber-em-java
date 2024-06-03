@@ -4,7 +4,7 @@
  */
 package br.com.commandfactory.controller.user;
 
-
+import br.com.commandfactory.controller.receivable.ICommand;
 import dao.UserDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

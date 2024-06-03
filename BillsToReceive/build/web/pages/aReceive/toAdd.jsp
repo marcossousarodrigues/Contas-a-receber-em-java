@@ -165,7 +165,7 @@
 
         <div class="label-input">
             <label>Data do Pagamento</label>
-            <input type="date" name="dt_payment" class="dt_payment" readonly="true"/>
+            <input type="date" name="dt_payment" class="dt_payment" readonly/>
         </div>
             
         <div class="label-input">
@@ -192,7 +192,7 @@
             
         <div class="label-input">
             <label>Data Emissão</label>
-            <input type="date" name="dt_emission" class="dt_emission" readonly="true"/>
+            <input type="date" name="dt_emission" class="dt_emission" readonly/>
         </div>
             
         <div class="label-select">

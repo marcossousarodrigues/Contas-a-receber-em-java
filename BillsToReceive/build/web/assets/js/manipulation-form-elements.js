@@ -43,6 +43,25 @@ class manipulationElements
                 name_field.type = 'text';
                 name_field.value = '';
             }
+            
+            if(options_field.value === "pay" || options_field.value === "blocked")
+            {
+                name_field.value = "Sim";
+                name_field.setAttribute("readonly", true);
+                name_field.style.backgroundColor = '#CCC';
+            }
+            else if(options_field.value === "Npay" || options_field.value === "Nblocked")
+            {
+                name_field.value = "Não";
+                name_field.setAttribute("readonly", true);
+                name_field.style.backgroundColor = '#CCC';
+            }
+            else
+            {
+                name_field.value = "";
+                name_field.removeAttribute("readonly");
+                name_field.style.backgroundColor = '#FFF';
+            }
         });
     }
     
@@ -55,12 +74,12 @@ class manipulationElements
         
         pay.addEventListener("change", ()=> {
             if (pay.value === "1") {
-                dt_payment.readonly = false;
+                dt_payment.removeAttribute("readonly");
                 dt_payment.style.backgroundColor = '#FFF';
                 const today = new Date();
                 dt_payment.value = this.formatDate(today);
             } else {
-               dt_payment.readonly = true;
+               dt_payment.setAttribute("readonly", true);
                dt_payment.style.backgroundColor = '#CCC';
                dt_payment.value = "";
             }

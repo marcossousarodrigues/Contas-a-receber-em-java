@@ -4,6 +4,7 @@
  */
 package br.com.commandfactory.controller.nature;
 
+import br.com.commandfactory.controller.receivable.ICommand;
 import dao.NatureDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

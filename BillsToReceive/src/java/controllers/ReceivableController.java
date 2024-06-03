@@ -4,12 +4,8 @@
  */
 package controllers;
 
-import br.com.commandfactory.controller.receivable.ICommand;
-import dao.NatureDao;
-import dao.ClientDao;
-import dao.ProductDao;
-import dao.ReceivableDao;
-import jakarta.servlet.RequestDispatcher;
+import facade.controller.ControllerFacade;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,11 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import models.Client;
-import models.Nature;
-import models.Product;
-import models.Receivable;
-import models.User;
 import utils.FactoryFormatTypes;
 
 /**
@@ -45,33 +36,17 @@ public class ReceivableController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             FactoryFormatTypes formatTypes = new FactoryFormatTypes();
-            try {
-                   
-                String paramAction = request.getParameter("action");
-                             
-                String nomeDaClasse = "br.com.commandfactory.controller.receivable." + paramAction + "ReceivableAction";
-               
-                Class classeAction = Class.forName(nomeDaClasse);
 
-                ICommand commandAction = (ICommand) classeAction.newInstance();
+            String paramAction = request.getParameter("action");
 
-                String pageDispatcher = commandAction.execute(request, response);
-                
-                request.getRequestDispatcher("/"+pageDispatcher).forward(request, response);
-                
-              
-                
-            } catch (Exception ex) {
-                System.out.println("Erro: " + ex.getMessage());
-                request.setAttribute("erro", ex.getMessage());
-               // request.getRequestDispatcher("erro.jsp").forward(request, response);
-                response.getWriter().println("Erro "+ ex.getMessage());
-            }
+            String className = "br.com.commandfactory.controller.receivable." + paramAction + "ReceivableAction";
+
+            ControllerFacade controllerFacade = new ControllerFacade();
+
+            controllerFacade.processController(request, response, className);
         }
     }
-   
-        
-     
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

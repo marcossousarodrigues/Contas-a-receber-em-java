@@ -6,6 +6,7 @@ package controllers;
 
 import br.com.commandfactory.controller.user.ICommand;
 import dao.UserDao;
+import facade.controller.ControllerFacade;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,71 +37,17 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            try {
-              
-                String paramAction = request.getParameter("action");
-             
-                String className = "br.com.commandfactory.controller.user." + paramAction + "UserAction";
-                
 
-                Class classAction = Class.forName(className);
+            String paramAction = request.getParameter("action");
 
-                ICommand commandAction = (ICommand) classAction.newInstance();
+            String className = "br.com.commandfactory.controller.user." + paramAction + "UserAction";
 
-                String pageDispatcher = commandAction.execute(request, response);
-                
-                request.getRequestDispatcher("/" + pageDispatcher).forward(request, response);
-               
-               
-                
-            } catch (Exception ex) {
-                System.out.println("Erro: " + ex.getMessage());
-                request.setAttribute("erro", ex.getMessage());
-                response.getWriter().println("Error "+ ex.getMessage());
-               // request.getRequestDispatcher("erro.jsp").forward(request, response);
-            }
-        
+            ControllerFacade controllerFacade = new ControllerFacade();
+
+            controllerFacade.processController(request, response, className);
+
         }
-        
 
-    }
-
-    protected User loginUser(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        String comfirPassword = request.getParameter("comfirPassword");
-        
-        User user = new User.UserBuilder().email(email).password(password).build();
-        UserDao userDao = new UserDao();
-
-        User usr = userDao.selectByEmail(user);
-        
-        User userRet = null;
-        
-        if(usr.getEmail() != null)
-        {
-            if(usr.getPassword().equals(user.getPassword()))
-            {
-               userRet = usr;
-            }
-        }
-        
-       
-        return userRet;
-    }
-
-    protected void authUser(HttpServletRequest request, HttpServletResponse response, User user)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession(); // Obtém a sessão do request
-        
-        User usr = new User.UserBuilder().name(user.getName()).email(user.getEmail()).build();
-        
-        session.setAttribute("user", usr);
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -4,12 +4,12 @@
  */
 package br.com.commandfactory.controller.user;
 
+import br.com.commandfactory.controller.receivable.ICommand;
 import dao.UserDao;
 import decorator.auth.user.BaseNotification;
 import decorator.auth.user.BlockNotification;
 import decorator.auth.user.EmailErrorNotification;
 import decorator.auth.user.INotification;
-import decorator.auth.user.InactivityLockNotification;
 import decorator.auth.user.PasswordErrorNotification;
 import decorator.auth.user.UnauthenticatedNotification;
 import jakarta.servlet.http.HttpServletRequest;

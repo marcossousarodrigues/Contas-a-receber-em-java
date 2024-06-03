@@ -25,6 +25,8 @@ import models.Receivable;
 import models.User;
 import utils.FactoryFormatTypes;
 import decorator.auth.user.INotification;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  *
@@ -34,8 +36,16 @@ public class teste {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
         FactoryFormatTypes formatTypes = new FactoryFormatTypes();
-          User user = new User.UserBuilder().build(); //(User) request.getSession().getAttribute("user");
-          
-          System.out.println(user.getId());
+        
+        ReceivableDao receivableDao = new ReceivableDao();
+        
+        ArrayList<Receivable> receivable = receivableDao.selectByDtExpiration();
+        
+        
+        for (int i = 0; i < receivable.size(); i++) {
+            System.out.println("teste");
+        }
+        
     }
+    
 }

@@ -9,6 +9,7 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.text.SimpleDateFormat" %>
 <%@page import="java.util.Date" %>
+<%@page import="java.time.LocalDate" %>
 
 <%
    ArrayList<Receivable> list = (ArrayList<Receivable>) request.getAttribute("receivable");
@@ -19,6 +20,33 @@
 
 <section class="container">
   
+    
+    <section class="container-legend">
+        <h3>Legendas</h3>
+        <div class="legend-description">
+            <p>Recebimentos Confirmados</p>
+            <div class="legend legend-green"></div>
+        </div>
+        
+        <div class="legend-description">
+            <p>Recebimentos Pendentes</p>
+            <div class="legend legend-orange"></div>
+        </div>
+        
+        <div class="legend-description">
+            <p>Em Processo de Recebimento</p>
+            <div class="legend legend-blue"></div>
+        </div>
+       
+        <div class="legend-description">
+            <p>Bloquedo</p>
+            <div class="legend legend-red-blocked"></div>
+        </div>
+        <div class="legend-description">
+            <p>Não Bloquedo</p>
+            <div class="legend legend-green-blocked"></div>
+        </div>
+    </section>
     
 <img src="/BillsToReceive/img/logo-green.png" alt="alt"/>
 
@@ -47,8 +75,10 @@
                 <option value="dt_payment">Data do Pagamento</option>
                 <option value="dt_expiration">Data de Vencimento</option>
                 <option value="form_of_payment">Forma de Pagamento</option>
-                <option value="blocked">Bloqueado</option>
-                <option value="Pago">Pago</option>
+                <option value="blocked">Bloqueados</option>
+                <option value="Nblocked">Não Bloqueados</option>
+                <option value="pay">Pagos</option>
+                <option value="Npay">Não Pagos</option>
             </select>
         </div>
         <div class="btn">
@@ -86,7 +116,34 @@
             <% for(int i = 0; i < list.size(); i++){%>
             
             <tr>
+                
+                <% if(list.get(i).getBlocked().equals("1")) { %>
+                
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><div class="legend legend-red-blocked"></div></td>
+                
+                
+                <% } else if(list.get(i).getPay().equals("1")) { %>
+                
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><div class="legend legend-green"></div></td>
+                
+                <% } else if( list.get(i).getDt_expiration() == null ) { %>
+                
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><div class="legend legend-green-blocked"></div></td>
+                
+                
+                <% } else if(list.get(i).getDt_expiration().before(new Date())) { %>
+                
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><div class="legend legend-orange"></div></td>
+                
+                <% } else if(list.get(i).getBlocked().equals("1")) { %>
+                
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><div class="legend legend-red-blocked"></div></td>
+                
+                <% } else { %>
+                
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><div class="legend legend-blue"></div></td>
+                
+                <% } %>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getId() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getTitle() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getInstallments() %></td>
