@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Product;
+import utils.FactoryFormatTypes;
 
 /**
  *
@@ -50,9 +51,12 @@ public class UserDao {
     
     public void update(User user) {
         
+        FactoryFormatTypes formatTypes = new FactoryFormatTypes();
+        
         String sql = "";
         sql += " UPDATE tb_users ";
-        sql += " SET name=?, surname=?, email=?, password=?, permission=?, blocked=? ";
+        sql += " SET name=?, surname=?, email=?, password=?, permission=?,";
+        sql += " dtAccess=?, errors_to_access=?, blocked=? ";
         sql += " WHERE id=? ";
 
         try {
@@ -67,8 +71,10 @@ public class UserDao {
             stmt.setString(3, user.getEmail());
             stmt.setString(4, user.getPassword());
             stmt.setString(5, user.getPermission());
-            stmt.setString(6, user.getBlocked());
-            stmt.setInt(7, user.getId());
+            stmt.setDate(6, formatTypes.formatSqlDate(user.getDtAccess()) );
+            stmt.setInt(7, user.getErrors_to_access());
+            stmt.setString(8, user.getBlocked());
+            stmt.setInt(9, user.getId());
             
             stmt.executeUpdate();
 
@@ -164,9 +170,10 @@ public class UserDao {
     
     public User selectByEmail(User user)
     {
+       FactoryFormatTypes formatTypes = new FactoryFormatTypes();
        String sql = "SELECT * FROM tb_users WHERE email=? ";
         
-       User usr = new User();
+       User usr = null;
        
        FactoryConnection connection = new FactoryConnection();
        try
@@ -184,8 +191,10 @@ public class UserDao {
                       .name(rs.getString("name"))
                       .surname(rs.getString("surname"))
                       .email(rs.getString("email"))
+                      .password(rs.getString("password"))   
                       .permission(rs.getString("permission"))
-                      .password(rs.getString("password"))                      
+                      .dtAccess(formatTypes.formatDate(rs.getString("dtAccess")))
+                      .errors_to_access(rs.getInt("errors_to_access"))
                       .blocked(rs.getString("blocked"))
                       .build();
                        usr = userBuild;

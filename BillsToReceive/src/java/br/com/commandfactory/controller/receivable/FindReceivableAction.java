@@ -47,13 +47,17 @@ public class FindReceivableAction implements ICommand {
 
             ArrayList<Receivable> list = receivableDao
                     .selectByField(field, fieldValue);
+            
+            searchMessage += list.size() + " Resultado(s) Correspondentes Para: ";
+            searchMessage += " '" + request.getParameter("fieldValue") + "'";
 
             if (request.getParameter("delayedReceipt") != null && request.getParameter("delayedReceipt").equals("true")) {
                 list = receivableDao.selectByDtExpiration();
+                
+                searchMessage = list.size() + " Resultado(s) Correspondentes Para: 'Recebimentos em atraso'";
             }
 
-            searchMessage += list.size() + " Resultado(s) Correspondentes Para: ";
-            searchMessage += " '" + request.getParameter("fieldValue") + "'";
+            
 
             request.setAttribute("receivable", list);
             request.setAttribute("searchMessage", searchMessage);

@@ -8,6 +8,7 @@ import br.com.commandfactory.controller.receivable.ICommand;
 import dao.UserDao;
 import decorator.auth.user.BaseNotification;
 import decorator.auth.user.BlockNotification;
+import decorator.auth.user.BlockedPasswordErrorNotification;
 import decorator.auth.user.EmailErrorNotification;
 import decorator.auth.user.INotification;
 import decorator.auth.user.PasswordErrorNotification;
@@ -61,10 +62,22 @@ public class AuthUserAction implements ICommand {
                     // notificação para usuários que erraram o e-mail
                     notification = new EmailErrorNotification(notification);
                 }
+                else if(userAuth.getErrors_to_access() >= 3)
+                {
+                   // notificação para usuários que erraram a senha mais de 3 vezes
+                   notification = new BlockedPasswordErrorNotification(notification);
+                   userAuth.setBlocked("1");
+                   userDAO.update(userAuth);
+                }
                 else if(!user.getPassword().equals(userAuth.getPassword()))
                 {
                     // notificação para usuários que erraram a senha
                     notification = new PasswordErrorNotification(notification);
+                    
+                  
+                    userAuth.setErrors_to_access( userAuth.getErrors_to_access() + 1);
+                    userDAO.update(userAuth);
+                    
                 }
                 else if(userAuth.getBlocked().equals("1"))
                 {

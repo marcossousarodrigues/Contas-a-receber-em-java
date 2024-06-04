@@ -4,6 +4,8 @@
  */
 package models;
 
+import java.util.Date;
+
 /**
  *
  * @author Marcos
@@ -15,21 +17,23 @@ public class User {
     private String email;
     private String password;
     private String permission;
+    private Date dtAccess;
+    private int errors_to_access;
     private String blocked;
 
-    public User() {
-    }
-
-    public User(int id, String name, String surname, String email, String password, String permission, String blocked) {
+    public User(int id, String name, String surname, String email, String password, String permission, Date dtAccess, int errors_to_access, String blocked) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
         this.permission = permission;
+        this.dtAccess = dtAccess;
+        this.errors_to_access = errors_to_access;
         this.blocked = blocked;
     }
 
+    
     
     public static class UserBuilder
     {
@@ -39,6 +43,8 @@ public class User {
         private String email;
         private String password;
         private String permission;
+        private Date dtAccess;
+        private int errors_to_access;
         private String blocked;
         
         public UserBuilder id(int id)
@@ -78,6 +84,18 @@ public class User {
             return this;
         }
         
+        public UserBuilder dtAccess(Date dtAccess)
+        {
+            this.dtAccess = dtAccess;
+            return this;
+        }
+        
+        public UserBuilder errors_to_access(int errors_to_access)
+        {
+            this.errors_to_access = errors_to_access;
+            return this;
+        }
+        
         public UserBuilder blocked(String blocked)
         {
             this.blocked = blocked;
@@ -86,7 +104,16 @@ public class User {
         
         public User build()
         {
-            return new User(id, name, surname, email, password, permission, blocked);
+            return new User(
+                    id, 
+                    name, 
+                    surname, 
+                    email, 
+                    password, 
+                    permission, 
+                    dtAccess, 
+                    errors_to_access, 
+                    blocked);
         }
         
     }
@@ -139,6 +166,22 @@ public class User {
         this.permission = permission;
     }
 
+    public Date getDtAccess() {
+        return dtAccess;
+    }
+
+    public void setDtAccess(Date dtAccess) {
+        this.dtAccess = dtAccess;
+    }
+
+    public int getErrors_to_access() {
+        return errors_to_access;
+    }
+
+    public void setErrors_to_access(int errors_to_access) {
+        this.errors_to_access = errors_to_access;
+    }
+
     public String getBlocked() {
         return blocked;
     }
@@ -147,6 +190,7 @@ public class User {
         this.blocked = blocked;
     }
 
+    
     
     
     

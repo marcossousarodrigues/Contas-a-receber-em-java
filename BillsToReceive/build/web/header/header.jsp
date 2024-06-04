@@ -142,15 +142,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/BillsToReceive/ReceivableController?action=Find&delayedReceipt=true">
-                            <div class="legend legend-orange"></div>
-                            <span>Recebimentos Atrasados</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="/BillsToReceive/ReceivableController?action=Find&field=pay&fieldValue=2">
                             <div class="legend legend-blue"></div>
                             <span>Em Processo de Recebimento</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/BillsToReceive/ReceivableController?action=Find&delayedReceipt=true">
+                            <div class="legend legend-orange"></div>
+                            <span>Recebimentos Atrasados</span>
                         </a>
                     </li>
                     
