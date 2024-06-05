@@ -88,9 +88,9 @@ public class UserDao {
     
     public ArrayList<User> selectAll() throws ClassNotFoundException
     {
+        FactoryFormatTypes formatTypes = new FactoryFormatTypes();
         Connection conn = null;
         FactoryConnection connection = new FactoryConnection();
-        
         PreparedStatement stmt;
         ResultSet rs;
         String sql = "SELECT * FROM tb_users";
@@ -111,6 +111,8 @@ public class UserDao {
                         .email(rs.getString("email"))
                         .password(rs.getString("password"))
                         .permission(rs.getString("permission"))
+                        .dtAccess(rs.getTimestamp("dtAccess"))
+                        .errors_to_access(rs.getInt("errors_to_access"))  
                         .blocked(rs.getString("blocked"))
                         .build();
                 
@@ -128,6 +130,8 @@ public class UserDao {
     
     public User selectById(User user)
     {
+       FactoryFormatTypes formatTypes = new FactoryFormatTypes();
+       
        String sql = "SELECT * FROM tb_users WHERE id=? ";
        
        
@@ -152,7 +156,9 @@ public class UserDao {
                       .surname(rs.getString("surname"))
                       .email(rs.getString("email"))
                       .password(rs.getString("password"))
-                      .permission(rs.getString("permission"))                      
+                      .permission(rs.getString("permission"))      
+                      .dtAccess(rs.getDate("dtAccess"))
+                      .errors_to_access(rs.getInt("errors_to_access"))                
                       .blocked(rs.getString("blocked"))
                       .build();
             }
@@ -193,7 +199,7 @@ public class UserDao {
                       .email(rs.getString("email"))
                       .password(rs.getString("password"))   
                       .permission(rs.getString("permission"))
-                      .dtAccess(formatTypes.formatDate(rs.getString("dtAccess")))
+                      .dtAccess(rs.getDate("dtAccess"))
                       .errors_to_access(rs.getInt("errors_to_access"))
                       .blocked(rs.getString("blocked"))
                       .build();
@@ -238,6 +244,7 @@ public class UserDao {
     }
     
      public ArrayList<User> selectByField(String field, String fieldValue) throws ClassNotFoundException, SQLException {
+        FactoryFormatTypes formatTypes = new FactoryFormatTypes();
         Connection conn = null;
         FactoryConnection connection = new FactoryConnection();
 
@@ -267,6 +274,8 @@ public class UserDao {
                         .email(rs.getString("email"))
                         .password(rs.getString("password"))
                         .permission(rs.getString("permission"))
+                        .dtAccess(rs.getTimestamp("dtAccess"))
+                        .errors_to_access(rs.getInt("errors_to_access"))  
                         .blocked(rs.getString("blocked"))
                         .build();
                 

@@ -9,6 +9,7 @@ import dao.UserDao;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import models.User;
+import utils.FactoryFormatTypes;
 
 /**
  *
@@ -18,6 +19,7 @@ public class UpdateUserAction implements ICommand {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)
     {
+        FactoryFormatTypes formatTypes = new FactoryFormatTypes();
         
         try
         {
@@ -29,6 +31,8 @@ public class UpdateUserAction implements ICommand {
                 .email(request.getParameter("email"))
                 .password(request.getParameter("password"))
                 .permission(request.getParameter("permission"))
+                .dtAccess(formatTypes.formatDate(request.getParameter("dtAccess")))
+                .errors_to_access(Integer.parseInt(request.getParameter("errors_to_access")))
                 .blocked(request.getParameter("blocked"))
                 .build();
         

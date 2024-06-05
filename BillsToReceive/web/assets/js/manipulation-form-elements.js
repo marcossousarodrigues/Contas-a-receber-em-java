@@ -18,13 +18,15 @@ class manipulationElements
         const nature_name = document.querySelector(".nature_name");
         const product_value = document.querySelector(".product_value");
         const title_value = document.querySelector(".title_value");
+        const title_amount = document.querySelector(".title_amount");
+        const title_total = document.querySelector(".title_total");
         
         
         return {
                 dt_emission, options_field, name_field, dt_payment, 
                 pay, product_id, name_product, description_product,
                 client_id, client_name, nature_id, nature_name, product_value,
-                title_value
+                title_value, title_amount, title_total
             }
     }
     
@@ -37,7 +39,7 @@ class manipulationElements
         
         options_field.addEventListener('change', ()=> {
             
-            if (options_field.value === 'dt_payment' || options_field.value === 'dt_expiration') {
+            if (options_field.value === 'dt_payment' || options_field.value === 'dt_expiration' || options_field.value === 'dt_emission') {
                 name_field.type = 'date';
             } else {
                 name_field.type = 'text';
@@ -90,7 +92,7 @@ class manipulationElements
         
         const {product_id, name_product, description_product,
               client_id, client_name, nature_id, nature_name,
-              product_value, title_value
+              product_value, title_value, title_amount, title_total
         } = this.selectElements();
         
         
@@ -119,6 +121,10 @@ class manipulationElements
         
         title_value.addEventListener('click', function() {
             title_value.value = product_value.options[product_value.selectedIndex].text;
+        });
+        
+        title_amount.addEventListener('blur', function() {
+            title_total.value = (title_amount.value * title_value.value);
         });
        
         

@@ -5,6 +5,9 @@
 package utils;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -71,5 +74,30 @@ public class FactoryFormatTypes {
     {
         return Integer.parseInt(number);
     }
+    
+    public String formatDateD_M_Y(Date date)
+    {
+       
+        // Define o formato da data que você deseja
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        
+        // Converte a data para a string no formato especificado
+        return dateFormat.format(date);
+
+    }
+    
+    public Date dateMinus7Days(Date today, int day)
+   {
+       
+        // Usar Calendar para subtrair 7 dias
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(today);
+        calendar.add(Calendar.DAY_OF_MONTH, -day);
+        
+        // Obter a nova data
+        Date newDate = calendar.getTime();
+        
+        return newDate;
+   }
     
 }

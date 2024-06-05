@@ -24,10 +24,6 @@ public class Client {
     private String number;
     private String blocked;
 
-    public Client() {
-        super();
-    }
-
     public Client(int id, String name, String person, String cnpj_cpf, String email, String tel, String cep, String country, String state, String city, String neighborhood, String street, String number, String blocked) {
         this.id = id;
         this.name = name;

@@ -220,5 +220,48 @@ public class NatureDao {
         return nature;
     }
     
+     public ArrayList<Nature> selectByField(String field, String fieldValue) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        FactoryConnection connection = new FactoryConnection();
+
+        PreparedStatement stmt;
+        ResultSet rs;
+        
+        
+        String sql = "SELECT * FROM tb_natures WHERE "+field+" LIKE ? ";
+
+        conn = connection.getConnection();
+        stmt = conn.prepareStatement(sql);
+        
+        stmt.setString(1, "%" + fieldValue + "%");
+        
+        rs = stmt.executeQuery();
+
+        ArrayList<Nature> list = new ArrayList<Nature>();
+
+        try {
+
+            while (rs.next()) {
+
+                Nature natures = new Nature.NatureBuilder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .description(rs.getString("description"))
+                        .type(rs.getString("type"))
+                        .costCenter(rs.getString("cost_center"))
+                        .account(rs.getString("account"))
+                        .blocked(rs.getString("blocked"))
+                        .build();
+
+                list.add(natures);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
+    
     
 }

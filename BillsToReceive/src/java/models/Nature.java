@@ -17,10 +17,6 @@ public class Nature {
     private String account;
     private String blocked;
 
-    public Nature() {
-        super();
-    }
-
     public Nature(int id, String name, String description, String type, String costCenter, String account, String blocked) {
         this.id = id;
         this.name = name;

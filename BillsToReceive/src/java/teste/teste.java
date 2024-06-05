@@ -18,7 +18,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import models.Client;
-import models.Debtors;
 import models.Nature;
 import models.Product;
 import models.Receivable;
@@ -36,15 +35,32 @@ public class teste {
     public static void main(String[] args) throws ClassNotFoundException, SQLException {
         
         FactoryFormatTypes formatTypes = new FactoryFormatTypes();
+         UserDao userDAO = new UserDao();
         
-        ReceivableDao receivableDao = new ReceivableDao();
+        // notificações de feedback
+        String redirect = "pages/user/login.jsp";
         
-        ArrayList<Receivable> receivable = receivableDao.selectByDtExpiration();
+        INotification notification = new BaseNotification();
+            
+        User user = new User.UserBuilder()
+                .email("marcos.sousa@areceber.com")
+                .build();
         
+        User userAuth = userDAO.selectByEmail(user);
+           
         
-        for (int i = 0; i < receivable.size(); i++) {
-            System.out.println("teste");
+        System.out.println(userAuth.getDtAccess());
+        System.out.println(formatTypes.dateMinus7Days(new Date(), 7));
+        
+        if( new Date().after(formatTypes.dateMinus7Days(new Date(), 7)) )
+        {
+            System.out.println("sim");
         }
+        else
+        {
+            System.out.println("não");
+        }
+        
         
     }
     

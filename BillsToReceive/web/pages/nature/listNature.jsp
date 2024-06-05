@@ -9,6 +9,7 @@
 <%@page import="java.util.ArrayList" %>
 <%
    ArrayList<Nature> list = (ArrayList<Nature>) request.getAttribute("natures");
+   String searchMessage = (String) request.getAttribute("searchMessage");
 %>
 
 <%@include file="/header/header.jsp" %>
@@ -36,23 +37,23 @@
     </a>
 </div>
 
-
+<h2><%= searchMessage != null ? searchMessage : ""  %></h2>
 <section class="form-search">
-    <form>
+    <form action="/BillsToReceive/NatureController" method="post">
         <div class="label-input">
             <label>Pesquisar</label>
-            <input type="text" name="name" class="name" placeholder="Digite aqui..."/>
+            <input type="text" name="fieldValue" class="fieldValue" placeholder="Digite aqui..."/>
         </div>
         <div class="label-input">
             <label>Pesquisar por:</label>
-            <select>
-                <option value="value">Id</option>
-                <option value="value">Name</option>
-                <option value="value">Descrição</option>
+            <select name="field" class="field">
+                <option value="id">Id</option>
+                <option value="name">Name</option>
+                <option value="description">Descrição</option>
             </select>
         </div>
         <div class="btn">
-            <button type="submit" name ="btn_action" class="btn-send" value="search">Buscar</button>
+            <button type="submit" name ="action" class="btn-send" value="Find">Buscar</button>
         </div>
     </form>
 </section>

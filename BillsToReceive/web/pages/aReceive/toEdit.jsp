@@ -49,7 +49,7 @@
         </div>
         
         <div class="label-select">
-            <label>Produto/Serviço</label>
+            <label>Codigo do Produto/Serviço</label>
             <select name="product_id" class="product_id">
                 <% for(int i = 0; i < productEdit.size(); i++) {
                     String selected = "";
@@ -64,7 +64,7 @@
         </div>
         
         <div class="label-select">
-            <label>Produto/Serviço</label>
+            <label>Nome Produto/Serviço</label>
             <select name="name_product" class="name_product">
                 <% for(int i = 0; i < productEdit.size(); i++) {
                     String selected = "";
@@ -79,7 +79,7 @@
         </div>
                 
         <div class="label-select">
-            <label>Produto/Serviço</label>
+            <label>Descrição do Produto/Serviço</label>
             <select name="description_product" class="description_product">
                 <% for(int i = 0; i < productEdit.size(); i++) {
                     String selected = "";
@@ -93,12 +93,36 @@
             </select>
         </div>
                 
+        <div class="label-select" style="display: none;">
+            
+           <select name="product_value" class="product_value" >
+               <% for(int i = 0; i < productEdit.size(); i++) {
+                    String selected = "";
+                    if (productEdit.get(i).getId() == receivableEdit.getProduct().getId()) {
+                        selected = "selected"; 
+                    }
+                %>
+                <option value="<%= productEdit.get(i).getId() %>" <%= selected %>><%= productEdit.get(i).getPrice() %></option>
+                <% } %>
+            </select>
+            
+        </div>      
         
         <div class="label-input">
             <label>Valor</label>
             <input type="text" name="title_value" value="<%= receivableEdit.getTitle_value()%>" class="title_value"/>
         </div>
-          
+        
+        <div class="label-input">
+            <label>Quantidade</label>
+            <input type="text" name="title_amount" value="<%= receivableEdit.getTitle_amount()%>" class="title_amount"/>
+        </div>
+        
+        <div class="label-input">
+            <label>Total</label>
+            <input type="text" name="title_total" value="<%= receivableEdit.getTitle_total()%>" class="title_total" readonly="true" style="background-color: #CCC;"/>
+        </div>
+        
         <div class="label-select">
             <label>Cliente</label>
             <select name="client_id" class="client_id">

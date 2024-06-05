@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import models.Client;
-import models.Debtors;
 import models.Nature;
 import models.Product;
 import models.Receivable;
@@ -48,6 +47,8 @@ public class CreateReceivableAction implements ICommand{
                     .installments(request.getParameter("installments"))
                     .titleType(request.getParameter("title_type"))
                     .title_value(formatTypes.formatDouble(request.getParameter("title_value")))
+                    .title_amount(formatTypes.formatInt(request.getParameter("title_amount")))
+                    .title_total(formatTypes.formatDouble(request.getParameter("title_total")))
                     .dt_payment(formatTypes.formatDate(request.getParameter("dt_payment")))
                     .dt_expiration(formatTypes.formatDate(request.getParameter("dt_expiration")))
                     .form_of_payment(request.getParameter("form_of_payment"))

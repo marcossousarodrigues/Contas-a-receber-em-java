@@ -189,17 +189,19 @@ public class ProductDao {
 
         rs = stmt.executeQuery();
 
-        Product prodcut = new Product();
+        Product product = null;
 
         while (rs.next()) {
-            prodcut.setId(rs.getInt("id"));
-            prodcut.setName(rs.getString("name"));
-            prodcut.setDescription(rs.getString("description"));
-            prodcut.setPrice(rs.getDouble("price"));
-            prodcut.setBlocked(rs.getString("blocked"));
+            product = new Product.ProductBuilder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .description(rs.getString("description"))
+                        .price(rs.getDouble("price"))
+                        .blocked(rs.getString("blocked"))
+                        .build();
         }
 
-        return prodcut;
+        return product;
     }
 
 }

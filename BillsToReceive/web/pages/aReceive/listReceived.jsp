@@ -72,6 +72,7 @@
                 <option value="Id">Id</option>
                 <option value="title">Numero Titulo</option>
                 <option value="title_type">Tipo do Titulo</option>
+                <option value="dt_emission">Data de Emissão</option>
                 <option value="dt_payment">Data do Pagamento</option>
                 <option value="dt_expiration">Data de Vencimento</option>
                 <option value="form_of_payment">Forma de Pagamento</option>
@@ -98,6 +99,8 @@
                 <th>Parcelas</th>
                 <th>Tipo do Titulo</th>
                 <th>Valor do titulo:</th>
+                <th>Quantidade</th>
+                <th>Total</th>
                 <th>Data de Pagamento</th>
                 <th>Data de Vencimento</th>
                 <th>Forma de Pagamento</th>
@@ -109,6 +112,7 @@
                 <th>Natureza Financeira</th>
                 <th>Editar</th>
                 <th>Excluir</th>
+                <th>Baixar Titulo</th>
             </tr>
         </thead>
         <tbody>
@@ -149,17 +153,20 @@
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getInstallments() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getTitle_type() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getTitle_value() %></td>
-                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getDt_payment() != null ? list.get(i).getDt_payment() : "" %></td>
-                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getDt_expiration() != null ? list.get(i).getDt_expiration() : "" %></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getTitle_amount() %></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getTitle_total() %></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getDt_payment() != null ? formatTypes.formatDateD_M_Y(list.get(i).getDt_payment()) : "" %></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getDt_expiration() != null ? formatTypes.formatDateD_M_Y(list.get(i).getDt_expiration()) : "" %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getForm_of_payment() != null ? list.get(i).getForm_of_payment() : "" %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getPay().equals("1") ? "sim" : "Não"%></td>
-                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getDt_emission() != null ? list.get(i).getDt_emission() : "" %></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getDt_emission() != null ? formatTypes.formatDateD_M_Y(list.get(i).getDt_emission()) : "" %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getBlocked().equals("1") ? "Sim" : "Não" %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getProduct().getName() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getClient().getName() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getNature().getName() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><a href="/BillsToReceive/ReceivableController?action=Read&id=<%= list.get(i).getId()%>"><img class="img-btns" src="/BillsToReceive/img/edit.png"></a></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><a href="/BillsToReceive/ReceivableController?action=Delete&id=<%= list.get(i).getId()%>"><img class="img-btns" src="/BillsToReceive/img/delete.png"></a></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><a href="/BillsToReceive/ReceivableController?action=UpdatePayment&id=<%= list.get(i).getId()%>"><img class="img-btns" src="/BillsToReceive/img/toGodown.png"></a></td>
             </tr>
             <%}%>
             <% } %>

@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import models.Client;
-import models.Debtors;
 import models.Nature;
 import models.Product;
 import models.Receivable;
@@ -32,11 +31,11 @@ public class ReceivableDao {
         String sql = "";
         sql += " INSERT INTO tb_receivable ";
         sql += " ( ";
-        sql += " title, installments, title_type, title_value, dt_payment, "; 
+        sql += " title, installments, title_type, title_value, title_amount, title_total, dt_payment, "; 
         sql += " dt_expiration, form_of_payment, pay, dt_emission, blocked, ";
         sql += " product_id, client_id, nature_id, user_id ";
         sql += " ) ";
-        sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
+        sql += " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? ) ";
 
         try {
             // abrindo conexão e executando a query
@@ -49,19 +48,19 @@ public class ReceivableDao {
             stmt.setString(2,   receivable.getInstallments());
             stmt.setString(3,   receivable.getTitle_type());
             stmt.setDouble(4,   receivable.getTitle_value());
-            stmt.setDate(5,     formatTypes.formatSqlDate(receivable.getDt_payment()) );
-            stmt.setDate(6,     formatTypes.formatSqlDate(receivable.getDt_expiration()) );
-            stmt.setString(7,   receivable.getForm_of_payment());
-            stmt.setString(8,   receivable.getPay());
-            stmt.setDate(9,     formatTypes.formatSqlDate(receivable.getDt_emission()) );
-            stmt.setString(10,  receivable.getBlocked());
-            stmt.setInt(11,     receivable.getProduct().getId());
-            stmt.setInt(12,     receivable.getClient().getId());
-            stmt.setInt(13,     receivable.getNature().getId());
-            stmt.setInt(14,     receivable.getUser().getId());
+            stmt.setInt(5,      receivable.getTitle_amount());
+            stmt.setDouble(6,   receivable.getTitle_total());
+            stmt.setDate(7,     formatTypes.formatSqlDate(receivable.getDt_payment()) );
+            stmt.setDate(8,     formatTypes.formatSqlDate(receivable.getDt_expiration()) );
+            stmt.setString(9,   receivable.getForm_of_payment());
+            stmt.setString(10,  receivable.getPay());
+            stmt.setDate(11,    formatTypes.formatSqlDate(receivable.getDt_emission()) );
+            stmt.setString(12,  receivable.getBlocked());
+            stmt.setInt(13,     receivable.getProduct().getId());
+            stmt.setInt(14,     receivable.getClient().getId());
+            stmt.setInt(15,     receivable.getNature().getId());
+            stmt.setInt(16,     receivable.getUser().getId());
            
-          
-            
             stmt.execute();
 
         } catch(Exception e) {
@@ -99,6 +98,8 @@ public class ReceivableDao {
                         .installments(rs.getString("installments"))
                         .titleType(rs.getString("title_type"))
                         .title_value(rs.getDouble("title_value"))
+                        .title_amount(rs.getInt("title_amount"))
+                        .title_total(rs.getDouble("title_total"))
                         .dt_payment(rs.getDate("dt_payment"))
                         .dt_expiration(rs.getDate("dt_expiration"))
                         .form_of_payment(rs.getString("form_of_payment"))
@@ -124,7 +125,7 @@ public class ReceivableDao {
     public static Receivable selectReceivable(int id) throws ClassNotFoundException, SQLException
     {
         
-        Receivable receivable = new Receivable();
+        Receivable receivable = null;
         
         try{
             
@@ -156,6 +157,8 @@ public class ReceivableDao {
                         .installments(rs.getString("installments"))
                         .titleType(rs.getString("title_type"))
                         .title_value(rs.getDouble("title_value"))
+                        .title_amount(rs.getInt("title_amount"))
+                        .title_total(rs.getDouble("title_total"))
                         .dt_payment(rs.getDate("dt_payment"))
                         .dt_expiration(rs.getDate("dt_expiration"))
                         .form_of_payment(rs.getString("form_of_payment"))
@@ -211,6 +214,8 @@ public class ReceivableDao {
                         .installments(rs.getString("installments"))
                         .titleType(rs.getString("title_type"))
                         .title_value(rs.getDouble("title_value"))
+                        .title_amount(rs.getInt("title_amount"))
+                        .title_total(rs.getDouble("title_total"))
                         .dt_payment(rs.getDate("dt_payment"))
                         .dt_expiration(rs.getDate("dt_expiration"))
                         .form_of_payment(rs.getString("form_of_payment"))
@@ -267,7 +272,7 @@ public class ReceivableDao {
         
         String sql = "";
         sql += " UPDATE tb_receivable ";
-        sql += " SET title=?, installments=?, title_type=?, title_value=?, dt_payment=?, "; 
+        sql += " SET title=?, installments=?, title_type=?, title_value=?, title_amount=?,title_total=?, dt_payment=?, "; 
         sql += " dt_expiration=?, form_of_payment=?, pay=?, dt_emission=?, blocked=?, ";
         sql += " product_id=?, client_id=?, nature_id=? ";
         sql += " WHERE id = ?";
@@ -282,16 +287,18 @@ public class ReceivableDao {
             stmt.setString(2,   receivable.getInstallments());
             stmt.setString(3,   receivable.getTitle_type());
             stmt.setDouble(4,   receivable.getTitle_value());
-            stmt.setDate(5,     formatTypes.formatSqlDate(receivable.getDt_payment()) );
-            stmt.setDate(6,     formatTypes.formatSqlDate(receivable.getDt_expiration()) );
-            stmt.setString(7,   receivable.getForm_of_payment());
-            stmt.setString(8,   receivable.getPay());
-            stmt.setDate(9,     formatTypes.formatSqlDate(receivable.getDt_emission()) );
-            stmt.setString(10,  receivable.getBlocked());
-            stmt.setInt(11,     receivable.getProduct().getId());
-            stmt.setInt(12,     receivable.getClient().getId());
-            stmt.setInt(13,     receivable.getNature().getId());
-            stmt.setInt(14,     receivable.getId());
+            stmt.setInt(5,      receivable.getTitle_amount());
+            stmt.setDouble(6,   receivable.getTitle_total());
+            stmt.setDate(7,     formatTypes.formatSqlDate(receivable.getDt_payment()) );
+            stmt.setDate(8,     formatTypes.formatSqlDate(receivable.getDt_expiration()) );
+            stmt.setString(9,   receivable.getForm_of_payment());
+            stmt.setString(10,   receivable.getPay());
+            stmt.setDate(11,     formatTypes.formatSqlDate(receivable.getDt_emission()) );
+            stmt.setString(12,  receivable.getBlocked());
+            stmt.setInt(13,     receivable.getProduct().getId());
+            stmt.setInt(14,     receivable.getClient().getId());
+            stmt.setInt(15,     receivable.getNature().getId());
+            stmt.setInt(16,     receivable.getId());
             
             stmt.executeUpdate();
 
@@ -337,6 +344,8 @@ public class ReceivableDao {
                         .installments(rs.getString("installments"))
                         .titleType(rs.getString("title_type"))
                         .title_value(rs.getDouble("title_value"))
+                        .title_amount(rs.getInt("title_amount"))
+                        .title_total(rs.getDouble("title_total"))
                         .dt_payment(rs.getDate("dt_payment"))
                         .dt_expiration(rs.getDate("dt_expiration"))
                         .form_of_payment(rs.getString("form_of_payment"))
@@ -393,6 +402,8 @@ public class ReceivableDao {
                         .installments(rs.getString("installments"))
                         .titleType(rs.getString("title_type"))
                         .title_value(rs.getDouble("title_value"))
+                        .title_amount(rs.getInt("title_amount"))
+                        .title_total(rs.getDouble("title_total"))
                         .dt_payment(rs.getDate("dt_payment"))
                         .dt_expiration(rs.getDate("dt_expiration"))
                         .form_of_payment(rs.getString("form_of_payment"))

@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import models.Client;
-import models.Debtors;
 import models.Nature;
 import models.Product;
 import models.Receivable;

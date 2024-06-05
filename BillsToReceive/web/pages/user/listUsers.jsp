@@ -7,9 +7,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="models.User" %>
 <%@page import="java.util.ArrayList" %>
+<%@page import="utils.FactoryFormatTypes"%>
+
 <%
    ArrayList<User> list = (ArrayList<User>) request.getAttribute("users");
    String searchMessage = (String) request.getAttribute("searchMessage");
+   
+
 %>
 
 <%@include file="/header/header.jsp" %>
@@ -70,6 +74,8 @@
                 <th>Surname</th>
                 <th>E-mail</th>
                 <th>Permissão</th>
+                <th>Erros de Senha</th>
+                <th>Data do Ultimo Acesso</th>
                 <th>Bloqueado</th>
             </tr>
         </thead>
@@ -82,14 +88,17 @@
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getSurname() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getEmail() %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getPermission().equals("1") ? "Operador do Sistema" : "Administrador" %></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getErrors_to_access() %></td>
+                <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getDtAccess() != null ? formatTypes.formatDateD_M_Y(list.get(i).getDtAccess()): "" %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><%= list.get(i).getBlocked().equals("1") ? "Sim" : "Não" %></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><a href="/BillsToReceive/UserController?action=Read&id=<%= list.get(i).getId()%>"><img class="img-btns" src="/BillsToReceive/img/edit.png"></a></td>
                 <td class="<%= (i % 2 == 0) ? "table-color-one" : "table-color-two" %>"><a href="/BillsToReceive/UserController?action=Delete&id=<%= list.get(i).getId()%>"><img class="img-btns" src="/BillsToReceive/img/delete.png"></a></td>
+            
             </tr>
             <%}%>
         </tbody>
     </table>
-
+        
 </section>
 
 

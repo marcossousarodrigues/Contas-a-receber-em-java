@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%@page import="models.User" %>
-
+<%@page import="utils.FactoryFormatTypes"%>
 <%
    
     User user = (User) request.getSession().getAttribute("user");
@@ -11,7 +11,8 @@
     {
       response.sendRedirect("/BillsToReceive/pages/user/login.jsp");
     }
-
+   
+    FactoryFormatTypes formatTypes = new FactoryFormatTypes();
 %>
 
 <!DOCTYPE html>
@@ -136,13 +137,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="/BillsToReceive/ReceivableController?action=Find&field=pay&fieldValue=1">
+                        <a href="/BillsToReceive/ReceivableController?action=Find&confirmedReceipts=true">
                             <div class="legend legend-green"></div>
                             <span>Recebimentos Confirmados</span>
                         </a>
                     </li>
                     <li>
-                        <a href="/BillsToReceive/ReceivableController?action=Find&field=pay&fieldValue=2">
+                        <a href="/BillsToReceive/ReceivableController?action=Find&pendingReceipts=true">
                             <div class="legend legend-blue"></div>
                             <span>Em Processo de Recebimento</span>
                         </a>

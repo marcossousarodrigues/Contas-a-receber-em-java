@@ -63,6 +63,8 @@ CREATE TABLE IF NOT EXISTS tb_receivable (
     installments VARCHAR(10),
     title_type VARCHAR(50),
     title_value DECIMAL(10, 2), 
+    title_amount INT, 
+    title_total DECIMAL(10, 2),
     dt_payment DATE,
     dt_expiration DATE,
     form_of_payment VARCHAR(255),
@@ -107,7 +109,7 @@ INSERT INTO tb_natures (name, description, type, cost_center, account, blocked) 
 ('Vendas de Equipamentos', 'Vendas de equipamentos técnicos', 'Receita', 'CC1001', '1.001.01.01.0001', '2');
 
 
-INSERT INTO tb_users (name, surname, email, password, permission, blocked) VALUES ('Marcos', 'Sousa', 'marcos.sousa@areceber.com', 'admin', 2, 1);
+INSERT INTO tb_users (name, surname, email, password, permission, blocked) VALUES ('Marcos', 'Sousa', 'marcos.sousa@areceber.com', 'admin', 2, 2);
 INSERT INTO tb_users (name, surname, email, password, permission, blocked) VALUES ('João', 'Silva', 'joao.silva@areceber.com', 'senha123', 1, 2);
 INSERT INTO tb_users (name, surname, email, password, permission, blocked) VALUES ('Maria', 'Oliveira', 'maria.oliveira@areceber.com', 'senha123', 2, 2);
 INSERT INTO tb_users (name, surname, email, password, permission, blocked) VALUES ('Carlos', 'Santos', 'carlos.santos@areceber.com', 'senha123', 1, 1);

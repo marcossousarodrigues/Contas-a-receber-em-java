@@ -57,6 +57,17 @@
                 <option value="2">Administrador</option>
             </select>
         </div>
+        
+        <div class="label-input">
+            <label>Erros de Senha</label>
+            <input type="text" name="errors_to_access" value="<%= userEdit != null ? userEdit.getErrors_to_access() : "" %>" class="errors_to_access"/>
+        </div>
+        
+        <div class="label-input">
+            <label>Data do Ultimo Acesso</label>
+            <input type="date" name="dtAccess" value="<%= userEdit != null ? userEdit.getDtAccess() : "" %>" class="dtAccess"/>
+        </div>
+                
                 
         <div class="label-select">
             <label>Bloqueado</label>

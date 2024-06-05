@@ -15,10 +15,6 @@ public class Product {
     private double price;
     private String blocked;
 
-    public Product() {
-        super();
-    }
-
     public Product(int id, String name, String description, double price, String blocked) {
         this.id = id;
         this.name = name;

@@ -106,7 +106,17 @@
             <label>Valor</label>
             <input type="text" name="title_value" class="title_value"/>
         </div>
-
+            
+        <div class="label-input">
+            <label>Quantidade</label>
+            <input type="text" name="title_amount" class="title_amount"/>
+        </div>
+            
+        <div class="label-input">
+            <label>Total</label>
+            <input type="text" name="title_total" class="title_total" readonly="true" style="background-color: #CCC;"/>
+        </div>
+        
         <div class="label-select">
             <label>Codigo do Cliente</label>
             <select name="client_id" class="client_id">

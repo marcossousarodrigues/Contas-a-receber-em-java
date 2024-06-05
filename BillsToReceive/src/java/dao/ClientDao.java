@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Client;
 import models.Nature;
+import org.eclipse.jdt.internal.compiler.ast.Clinit;
 import utils.FactoryConnection;
 
 /**
@@ -188,27 +189,82 @@ public class ClientDao {
         
         rs = stmt.executeQuery();
         
-        Client client = new Client();
+        Client client = null;
       
         while(rs.next())
         {
-            client.setId(rs.getInt("id"));
-            client.setName(rs.getString("name"));
-            client.setPerson(rs.getString("person"));
-            client.setCnpj_cpf(rs.getString("cnpj_cpf"));
-            client.setEmail(rs.getString("email"));
-            client.setTel(rs.getString("tel"));
-            client.setCep(rs.getString("cep"));
-            client.setCountry(rs.getString("country"));
-            client.setState(rs.getString("state"));
-            client.setCity(rs.getString("city"));
-            client.setNeighborhood(rs.getString("neighborhood"));
-            client.setStreet(rs.getString("street"));
-            client.setNumber(rs.getString("number"));
-            client.setBlocked(rs.getString("blocked"));
+                client = new Client.ClientBuilder()
+                        .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .person(rs.getString("person"))
+                        .cnpjCpf(rs.getString("cnpj_cpf"))
+                        .email(rs.getString("email"))
+                        .tel(rs.getString("tel"))
+                        .cep(rs.getString("cep"))
+                        .country(rs.getString("country"))
+                        .state(rs.getString("state"))
+                        .city(rs.getString("city"))
+                        .neighborhood(rs.getString("neighborhood"))
+                        .street(rs.getString("street"))
+                        .number(rs.getString("number"))
+                        .blocked(rs.getString("blocked"))
+                        
+                        .build();
+            
         }
         
         return client;
+    }
+    
+    public ArrayList<Client> selectByField(String field, String fieldValue) throws ClassNotFoundException, SQLException {
+        Connection conn = null;
+        FactoryConnection connection = new FactoryConnection();
+
+        PreparedStatement stmt;
+        ResultSet rs;
+        
+        
+        String sql = "SELECT * FROM tb_clients WHERE "+field+" LIKE ? ";
+
+        conn = connection.getConnection();
+        stmt = conn.prepareStatement(sql);
+        
+        stmt.setString(1, "%" + fieldValue + "%");
+        
+        rs = stmt.executeQuery();
+
+        ArrayList<Client> list = new ArrayList<Client>();
+
+        try {
+
+            while (rs.next()) {
+
+                Client client = new Client.ClientBuilder()
+                       .id(rs.getInt("id"))
+                        .name(rs.getString("name"))
+                        .person(rs.getString("person"))
+                        .cnpjCpf(rs.getString("cnpj_cpf"))
+                        .email(rs.getString("email"))
+                        .tel(rs.getString("tel"))
+                        .cep(rs.getString("cep"))
+                        .country(rs.getString("country"))
+                        .state(rs.getString("state"))
+                        .city(rs.getString("city"))
+                        .neighborhood(rs.getString("neighborhood"))
+                        .street(rs.getString("street"))
+                        .number(rs.getString("number"))
+                        .blocked(rs.getString("blocked"))
+                        
+                        .build();
+
+                list.add(client);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return list;
     }
     
 }
