@@ -48,7 +48,6 @@ Para este projeto, foram definidas e criadas as seguintes tabelas:
 </ul>
 
  <h1>Sistema</h1>
- <p>Agora vamos ver as telas</p>
  
  <h2>Login</h2>
 
