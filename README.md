@@ -28,6 +28,7 @@ Para uma visão geral deste projeto, vou adicionar as regras que utilizei e as i
 <h3>
   1.1 Tabelas
 </h3>
+![image](https://github.com/marcossousarodrigues/Contas-a-receber-em-java/assets/49259832/c4188da1-7fa5-4eac-8da1-84e051f2ea21)
 
 <h3>
 1.2 Detalhamento
@@ -35,10 +36,21 @@ Para uma visão geral deste projeto, vou adicionar as regras que utilizei e as i
 <p>
 Para este projeto, foram definidas e criadas as seguintes tabelas:
 </p>
+<ul>
+  <li><strong>tb_clients:</strong> onde é realizado o cadastro e manutenção de clientes.</li>
+  <li><strong>tb_natures:</strong> onde é feito o cadastro das naturezas financeiras e a manutenção desse cadastro.</li>
+  <li><strong>tb_products:</strong> nessa tabela, os produtos são cadastrados, atualizados, consultados e deletados. Além disso, possui outras funcionalidades.</li>
+  <li><strong>tb_clients:</strong> onde é realizado o cadastro e manutenção de clientes.</li>
+  <li><strong>tb_users:</strong> a tabela de usuários é responsável pelo gerenciamento dos usuários. Esta tabela permite alterações, deleções, consultas e criação de registros. Além disso, possui funcionalidades para bloquear e desbloquear usuários e campos com regras específicas.</li>
+  <li><strong>tb_receivable:</strong> essa é a tabela principal, sendo as demais auxiliares. Esta tabela armazena os dados relacionados aos títulos financeiros, incluindo as chaves estrangeiras dos cadastros auxiliares, que são clientes, naturezas e produtos.</li>
+</ul>
+ 
 
-tb_clients: onde é realizado o cadastro e manutenção de clientes.
-tb_natures: onde é feito o cadastro das naturezas financeiras e a manutenção desse cadastro.
-tb_products: nessa tabela, os produtos são cadastrados, atualizados, consultados e deletados. Além disso, possui outras funcionalidades.
-tb_users: a tabela de usuários é responsável pelo gerenciamento dos usuários. Esta tabela permite alterações, deleções, consultas e criação de registros. Além disso, possui funcionalidades para bloquear e desbloquear usuários e campos com regras específicas.
-tb_receivable: essa é a tabela principal, sendo as demais auxiliares. Esta tabela armazena os dados relacionados aos títulos financeiros, incluindo as chaves estrangeiras dos cadastros auxiliares, que são clientes, naturezas e produtos.
-Espero que isso ajude a entender melhor o projeto e suas funcionalidades! Para mais detalhes, você pode conferir o código no repositório.
+
+
+
+
+
+
+
+ 
