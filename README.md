@@ -28,7 +28,10 @@ Para uma visão geral deste projeto, vou adicionar as regras que utilizei e as i
 <h3>
   1.1 Tabelas
 </h3>
-![image](https://github.com/marcossousarodrigues/Contas-a-receber-em-java/assets/49259832/c4188da1-7fa5-4eac-8da1-84e051f2ea21)
+
+
+![image](https://github.com/marcossousarodrigues/Contas-a-receber-em-java/assets/49259832/1e23c494-fa69-4495-87be-273a8db94166)
+
 
 <h3>
 1.2 Detalhamento
